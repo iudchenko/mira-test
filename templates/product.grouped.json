@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product-grouped",
+      "type": "main-product",
       "blocks": {
         "vendor": {
           "type": "text",
@@ -12,6 +12,9 @@
         },
         "title": {
           "type": "title"
+        },
+        "grouped_products": {
+          "type": "grouped_products"
         },
         "caption": {
           "type": "text",
@@ -90,6 +93,7 @@
         "title",
         "caption",
         "price",
+        "grouped_products",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
