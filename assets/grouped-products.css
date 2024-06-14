@@ -1,0 +1,37 @@
+.product__grouped-products-title {
+  font-size: 1.3rem;
+  line-height: calc(1 + 0.5 / var(--font-body-scale));
+  letter-spacing: 0.04rem;
+  margin: 0;
+}
+.product__grouped-products-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1.2rem 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+.product__grouped-products-item {
+  border-radius: var(--variant-pills-radius);
+  display: inline-block;
+  width: 4.8rem;
+  height: 4.8rem;
+  padding: 0;
+  border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
+}
+.product__grouped-products-item:hover {
+  border-color: rgb(var(--color-foreground));
+}
+.product__grouped-products-item a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.product__grouped-products-item--current {
+  border: 3px solid rgb(var(--color-foreground));
+}

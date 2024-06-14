@@ -22,6 +22,10 @@
     {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
+  {%- if section.settings.enable_grouped_products == true -%}
+    {{ 'grouped-products.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+
   {%- style -%}
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -460,17 +464,24 @@
 
               {%- when 'grouped_products' -%}
                 {%- if section.settings.enable_grouped_products == true -%}
-                  <h3 class="product__grouped-products-title">Color</h3>
-                  <ul class="product__grouped-products-list">
-                    {%- for grouped_product in product.metafields.custom.grouped_products.value -%}
-                      <li class="product__grouped-products-item">
-                        <a href="{{ grouped_product.url }}">
-                          {{- grouped_product.title -}}
-                          {{ grouped_product.metafields.custom.color_swatch.value }}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
+                  {% assign url_parts = request.path | split: '/' %}
+                  {% assign slug = url_parts | last %}
+
+                  <div class="product__info-container">
+                    <h3 class="product__grouped-products-title">Color</h3>
+                    <ul class="product__grouped-products-list">
+                      {%- for grouped_product in product.metafields.custom.grouped_products.value -%}
+                        {% assign swatch_color = grouped_product.metafields.custom.color_swatch.value %}
+
+                        <li
+                          class="product__grouped-products-item{% if slug == grouped_product.handle %} product__grouped-products-item--current{% endif %}"
+                          style="background: {{ swatch_color }}"
+                        >
+                          <a href="{{ grouped_product.url }}"></a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
                 {%- endif -%}
 
               {%- when 'variant_picker' -%}
