@@ -2376,6 +2376,9 @@
         "enable_grouped_products": {
           "label": "Enable grouped products"
         },
+        "grouped_products_header": {
+          "label": "Color"
+        },
         "enable_sticky_info": {
           "label": "Enable sticky content on desktop"
         },

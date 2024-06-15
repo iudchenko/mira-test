@@ -467,17 +467,30 @@
                   {% assign url_parts = request.path | split: '/' %}
                   {% assign slug = url_parts | last %}
 
-                  <div class="product__info-container">
-                    <h3 class="product__grouped-products-title">Color</h3>
-                    <ul class="product__grouped-products-list">
+                  <div class="product__grouped-products product__info-container">
+                    <span class="product__grouped-products-title">
+                      {{ section.settings.grouped_products_header }}
+                    </span>
+                    <ul class="product__grouped-products-list" role="list">
                       {%- for grouped_product in product.metafields.custom.grouped_products.value -%}
                         {% assign swatch_color = grouped_product.metafields.custom.color_swatch.value %}
+                        {% assign tooltip = grouped_product.metafields.custom.color_swatch_text.value %}
 
                         <li
-                          class="product__grouped-products-item{% if slug == grouped_product.handle %} product__grouped-products-item--current{% endif %}"
+                          class="product__grouped-products-item product__grouped-products-tooltip{% if slug == grouped_product.handle %} product__grouped-products-item--current{% endif %}"
                           style="background: {{ swatch_color }}"
+                          role="listitem"
                         >
-                          <a href="{{ grouped_product.url }}"></a>
+                          <a
+                            href="{{ grouped_product.url }}"
+                            aria-label="Go to {{ tooltip }}"
+                            ><span class="sr-only">{{ tooltip }}</span></a
+                          >
+                          {% if tooltip != '' %}
+                            <span class="product__grouped-products-tooltip-text" role="tooltip" aria-hidden="true">
+                              {{- tooltip -}}
+                            </span>
+                          {% endif %}
                         </li>
                       {%- endfor -%}
                     </ul>
@@ -2112,6 +2125,12 @@
       "id": "enable_grouped_products",
       "default": true,
       "label": "t:sections.main-product.settings.enable_grouped_products.label"
+    },
+    {
+      "type": "text",
+      "id": "grouped_products_header",
+      "default": "t:sections.main-product.settings.grouped_products_header.label",
+      "label": "t:sections.main-product.settings.grouped_products_header.label"
     },
     {
       "type": "color_scheme",
