@@ -1,4 +1,4 @@
-# README
+# Instruction on adding new color swatches
 
 ## Overview
 
